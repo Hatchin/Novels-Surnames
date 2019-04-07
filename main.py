@@ -35,7 +35,7 @@ def start():
 
     # 从小说列表中读取单本小说url
     basic_url = 'http://www.jjwxc.net/bookbase.php?fw0=0&fbsj=0&ycx1=1&xx0=0&mainview0=0&sd0=0&lx0=0&fg0=0&sortType=0&isfinish=0&collectiontypes=ors&searchkeywords=&page='
-    max_page_id = 1501 # 读取列表的最大页数
+    max_page_id = 2001 # 读取列表的最大页数
     df = pd.DataFrame(columns=['prot', 'supp', 'theme', 'topc', 'date','year','month', 'scores', 'url'])
 
     print ('..fetching novel list..')
