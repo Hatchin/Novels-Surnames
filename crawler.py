@@ -123,7 +123,8 @@ def multiple_novels(novels_list, df):
     i = len(df)
     bad_connect = defaultdict(int) # 记录每个url连接失败的次数
     while novels_list:
-        # 读取一本小说
+        print ('%d novels left...' % len(novels_list))
+        # 读取一本小说 
         novel = novels_list.pop()
         url_whole = 'http://www.jjwxc.net/'+novel
         print ('Fetching -- ', url_whole)

@@ -40,6 +40,8 @@ def start():
 
     print ('..fetching novel list..')
     nv_list = many_novels_url(basic_url, max_page_id, req) # 历遍小说列表，读取小说url
+    print ('==============Get %d novels' % len(nv_list))
+    print ('=============================')
 
     print ('..fetching done..')
     print ()
