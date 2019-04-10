@@ -156,6 +156,31 @@ def multiple_novels(novels_list, df):
                 print ()
 
             time.sleep(15) # 暂停15秒重新连接
+    return df
+
+def chunks(l, n):
+    """"
+    Break a list into chunks of len(n)
+    """
+    for i in range(0, len(l), n):
+        yield l[i:i+n]
             
+def extreme_long_list(novels_list, df, n):
+    """
+    For long novel list, return several files
+    In one file, there are around n entries (maybe some url is unvaild)
+    """
+        results = multiple_novels(novels_list, df)
+        results.to_csv('data.csv', encoding='utf_8_sig') # 存至csv文件，中文encoding
+    else:
+        i = 0
+        for novels in chunks(novels_list, n):
+            results = multiple_novels(novels, df)
+            results
+
+
+
+
+
 
 
