@@ -18,13 +18,16 @@ def one_novel_info(url):
     soup = bs(res.content.decode(html_encode,errors='ignore'), "html.parser")
     
     # 截取有用的tag
-    # 例子：
-    # <span class="bluetext">搜索关键字：主角：李维斯，宗铭。 ┃ 配角：于天河，焦磊。唐熠，桑菡。 ┃ 其它：绝世猫痞</span>
-    # <span style="color:#000;float:none" itemprop="genre"> 原创-纯爱-近代现代-悬疑 </span>
     meta_info = soup.find('meta', {'name': 'Description'}) 
     # theme = soup.find('span', {'itemprop':'genre'}).text.strip('\r\n').strip(' ')
     theme_info = soup.find('span', {'itemprop':'genre'})
 
+    # 例子：
+    # <span class="bluetext">搜索关键字：主角：李维斯，宗铭。 ┃ 配角：于天河，焦磊。唐熠，桑菡。 ┃ 其它：绝世猫痞</span>
+    # <span style="color:#000;float:none" itemprop="genre"> 原创-纯爱-近代现代-悬疑 </span>
+
+    # 提取主题信息
+    # 为主题缺失的url补上空返回
     if theme_info:
         try:
             theme = theme_info.text.strip('\r\n').strip(' ')
@@ -35,6 +38,8 @@ def one_novel_info(url):
         print ('======== No theme found!===============')
         theme = ''
 
+    # 提取meta data
+    # 为无法提取的meta data补上空返回
     if meta_info:
         try:
             writer_book_prot, supp, other = meta_info.attrs['content'].split(' ┃ ')
@@ -52,14 +57,14 @@ def one_novel_info(url):
     time_reg = re.compile("最新更新:(.*) 作品积分：")
     scor_reg = re.compile("作品积分：(.*)$")
     
-    protagonist = re.split('、 |，|/',prot_reg.search(writer_book_prot).group(1))
-    supporting = re.split('、 |，|/',supp_reg.search(supp).group(1))
-    topic = topc_reg.search(other).group(1).split('，')
-    updating_str = time_reg.search(other).group(1)
-    updating = datetime.datetime.strptime(updating_str, '%Y-%m-%d %H:%M:%S')
-    update_month = updating.month
-    update_year = updating.year
-    scores = int(scor_reg.search(other).group(1))
+    protagonist = re.split('、 |，|/',prot_reg.search(writer_book_prot).group(1)) # 主角
+    supporting = re.split('、 |，|/',supp_reg.search(supp).group(1)) # 配角
+    topic = topc_reg.search(other).group(1).split('，') # 标签
+    updating_str = time_reg.search(other).group(1) # 最近更新日期 （string）
+    updating = datetime.datetime.strptime(updating_str, '%Y-%m-%d %H:%M:%S') # 最近更新日期 （datetime）
+    update_month = updating.month # 最近更新-月份
+    update_year = updating.year # 最近更新 - 年份
+    scores = int(scor_reg.search(other).group(1)) # 积分
     
     print (protagonist)
     return protagonist, supporting, theme, topic, updating, update_year, update_month, scores, url
