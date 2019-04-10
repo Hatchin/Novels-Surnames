@@ -36,6 +36,7 @@ def start():
     # 从小说列表中读取单本小说url
     basic_url = 'http://www.jjwxc.net/bookbase.php?fw0=0&fbsj=0&ycx1=1&xx0=0&mainview0=0&sd0=0&lx0=0&fg0=0&sortType=0&isfinish=0&collectiontypes=ors&searchkeywords=&page='
     max_page_id = 2001 # 读取列表的最大页数
+    n = 10000 # 单个df最大小说数
     df = pd.DataFrame(columns=['prot', 'supp', 'theme', 'topc', 'date','year','month', 'scores', 'url'])
 
     print ('..fetching novel list..')
@@ -48,9 +49,16 @@ def start():
 
 
     print ('..fetching and storing info..')
-    multiple_novels(nv_list, df) # 历遍小说url， 提取信息
+    i = 0
 
-    df.to_csv('data.csv', encoding='utf_8_sig') # 存至csv文件，中文encoding
+    # 每读取n条小说url，存储一次csv文件
+    for nv in chunks(nv_list, n):
+        results = multiple_novels(nv, df) # 历遍小说url， 提取信息
+        results.to_csv('data_%d.csv' % i, encoding='utf_8_sig') # 存至csv文件，中文encoding
+        print ('============ %d group data saved =====' % i)
+        print ('===================')
+        print ()
+        i += 1 
 
 start()
 
