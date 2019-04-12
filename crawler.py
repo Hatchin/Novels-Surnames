@@ -126,7 +126,7 @@ def multiple_novels(novels_list, df):
     提供一个包含多部小说url的list，返回一个dataframe，包含每本小说的相应信息
     """
     i = len(df)
-    bad_connect = defaultdict(int) # 记录每个url连接失败的次数
+    bad_connect = defaultdict(int) # 记录曾连接失败的url的失败次数
     while novels_list:
         print ('%d novels left...' % len(novels_list))
         # 读取一本小说 
