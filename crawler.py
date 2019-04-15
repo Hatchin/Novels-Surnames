@@ -151,12 +151,13 @@ def multiple_novels(novels_list, df):
             if bad_connect[novel] < 5:
                 bad_connect[novel] += 1 
                 novels_list.insert(0, novel) # 将该小说放回list中以重新读取
+                time.sleep(15) # 暂停15秒重新连接
             else: # 放弃
                 print ('============Too many failures!! =============')
                 print (url_whole)
                 print ()
 
-            time.sleep(15) # 暂停15秒重新连接
+            
     return df
 
 def chunks(l, n):
