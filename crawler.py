@@ -48,6 +48,7 @@ def one_novel_info(url):
             return '', '', '', '','','','','', url
     else:
         print ('========= No meta info find! ===========')
+        return '', '', '', '','','','','', url
 
     
     # 正则化取词
