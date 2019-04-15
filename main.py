@@ -49,8 +49,8 @@ def start():
 
 
     print ('..fetching and storing info..')
+    
     i = 0
-
     # 每读取n条小说url，存储一次csv文件
     for nv in chunks(nv_list, n):
         results = multiple_novels(nv, df) # 历遍小说url， 提取信息
