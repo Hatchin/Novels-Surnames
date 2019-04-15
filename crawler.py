@@ -156,6 +156,7 @@ def multiple_novels(novels_list, df):
                 print ('============Too many failures!! =============')
                 print (url_whole)
                 print ()
+                time.sleep(5) # 暂停5秒重新连接
 
             
     return df
