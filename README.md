@@ -6,3 +6,5 @@
 
 # data
 210,000 novels
+
+# done - ~8days
