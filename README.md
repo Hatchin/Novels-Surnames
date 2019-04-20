@@ -6,5 +6,6 @@
 
 # data
 210,000 novels
+[download](https://drive.google.com/file/d/1ElT-M2KJNnZ7HNRcIRhTva1tXj8a7gQd/view?usp=sharing)
 
 # done - ~8days
